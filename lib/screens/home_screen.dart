@@ -145,7 +145,155 @@ class HomeScreen extends StatelessWidget {
                         fontWeight: FontWeight.w300
                       ),
                         )
+                    ),
+                    const SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                        Image.asset(
+                      'assets/11.png',
+                      scale: 8,
+                    ),
+                    //Es importante saber que esta dentro de que 
+                    const SizedBox(width: 5),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                        'Soleado',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300
+                      ),
+                      ),
+                      SizedBox(width: 3),
+                         Text(
+                        '5:34 AM',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300
+                      ),
+                      ),
+                      ],
                     )
+                          ]
+                        ),
+
+                        Row(
+                          children: [
+                        Image.asset(
+                      'assets/12.png',
+                      scale: 8,
+                    ),
+                    //Es importante saber que esta dentro de que 
+                    const SizedBox(width: 5),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                        'Ocaso',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300
+                      ),
+                      ),
+                      SizedBox(width: 3),
+                         Text(
+                        '5:34 PM',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300
+                      ),
+                      ),
+                      ],
+                    )
+                          ]
+                        )
+                                         
+            
+                                         
+                      ],
+                    ),
+
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5.0),
+                      child: Divider(
+                        color: Color.fromARGB(255, 67, 186, 161),
+                      ),
+                    ),
+                      
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                        Image.asset(
+                      'assets/13.png',
+                      scale: 8,
+                    ),
+                    //Es importante saber que esta dentro de que 
+                    const SizedBox(width: 5),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                        'Temp. maxima',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300
+                      ),
+                      ),
+                      SizedBox(width: 3),
+                         Text(
+                        '42°',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300
+                      ),
+                      ),
+                      ],
+                    )
+                          ]
+                        ),
+
+                        Row(
+                          children: [
+                        Image.asset(
+                      'assets/14.png',
+                      scale: 8,
+                    ),
+                    //Es importante saber que esta dentro de que 
+                    const SizedBox(width: 5),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                        'Temp. minima',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300
+                      ),
+                      ),
+                      SizedBox(width: 3),
+                         Text(
+                        '34°',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300
+                      ),
+                      ),
+                      ],
+                    )
+                          ]
+                        )
+                                         
+            
+                                         
+                      ],
+                    ),
+                    
                   ],
                 ),
               )
