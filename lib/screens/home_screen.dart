@@ -87,6 +87,67 @@ class HomeScreen extends StatelessWidget {
                 decoration: const BoxDecoration(color: Colors.transparent),
               ),
              
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  //Para ubicarlo en la parte superior izquierda
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                     const Text(
+                      '📍 Ubicación',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300
+                      ),
+                    ),
+
+                     const SizedBox(height: 8),
+                     const Text(
+                      'Buenos días',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    Image.asset(
+                      'assets/1.png'
+                    ),
+                    const Center(
+                      child: Text(
+                        '31°',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 55,
+                        fontWeight: FontWeight.w600
+                      ),
+                        )
+                    ),
+
+                    const Center(
+                      child: Text(
+                        'Tormenta',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w500
+                      ),
+                        )
+                    ),
+                      const Center(
+                      child: Text(
+                        'Viernes 15 · 9:22 AM',
+                        style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300
+                      ),
+                        )
+                    )
+                  ],
+                ),
               )
           ],
         ),
