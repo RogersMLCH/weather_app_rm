@@ -3,12 +3,57 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app_rm/bloc/weather_bloc_bloc.dart';
 
 //Como buen practica  trabajamos en un archivo diferente al principal
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+    State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  
+  Widget getWeatherIcon(int code)
+  {
+    switch (code) {
+		  case >= 200 && < 300 :
+		    return Image.asset(
+					'assets/1.png'
+				);
+			case >= 300 && < 400 :
+		    return Image.asset(
+					'assets/2.png'
+				);
+			case >= 500 && < 600 :
+		    return Image.asset(
+					'assets/3.png'
+				);
+			case >= 600 && < 700 :
+		    return Image.asset(
+					'assets/4.png'
+				);
+			case >= 700 && < 800 :
+		    return Image.asset(
+					'assets/5.png'
+				);
+			case == 800 :
+		    return Image.asset(
+					'assets/6.png'
+				);
+			case > 800 && <= 804 :
+		    return Image.asset(
+					'assets/7.png'
+				);
+		  default:
+			return Image.asset(
+				'assets/7.png'
+			);
+		}
+
+  }
   @override
   Widget build(BuildContext context) {
     //Crea una zona de contenido para mostrar en la vista
@@ -43,14 +88,14 @@ class HomeScreen extends StatelessWidget {
             children: [
               Align(
                 //Aliniamieto en lso ejes
-                alignment: AlignmentDirectional(3, -0.3),
+                alignment: const  AlignmentDirectional(3, -0.3),
                 child: Container(
                   //Las dimensiones del objeto
                   height: 300,
                   width: 300,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: const Color.fromARGB(255, 77, 207, 75)
+                      color:  Color.fromARGB(255, 77, 207, 75)
                       //color: Colors.deepPurple
                       ),
                 ),
@@ -89,6 +134,7 @@ class HomeScreen extends StatelessWidget {
               ),
               BlocBuilder<WeatherBlocBloc, WeatherBlocState>(
                 builder: (context, state) {
+                  if (state is WeatherBlocSucess){
                   return SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
@@ -96,40 +142,45 @@ class HomeScreen extends StatelessWidget {
                       //Para ubicarlo en la parte superior izquierda
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          '📍 Ubicación',
-                          style: TextStyle(
+                         Text(
+                          '📍 ${state.weather.areaName}',
+                          style: const TextStyle(
                               color: Colors.white, fontWeight: FontWeight.w300),
                         ),
                         const SizedBox(height: 8),
                         const Text(
-                          'Buenos días',
+                          //'Buenos días',
+                          ' ',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 25,
                               fontWeight: FontWeight.bold),
                         ),
-                        Image.asset('assets/1.png'),
-                        const Center(
+                        //Image.asset('assets/3.png'),
+                        getWeatherIcon(state.weather.weatherConditionCode!),
+                         Center(
                             child: Text(
-                          '31°',
-                          style: TextStyle(
+                          '${state.weather.temperature!.celsius!.round()}°C',
+                          style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 55,
+                              fontSize: 35,
                               fontWeight: FontWeight.w600),
                         )),
-                        const Center(
+                         Center(
                             child: Text(
-                          'Tormenta',
-                          style: TextStyle(
+                          state.weather.weatherMain!.toUpperCase() ,
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 25,
                               fontWeight: FontWeight.w500),
                         )),
-                        const Center(
+                         Center(
                             child: Text(
-                          'Viernes 15 · 9:22 AM',
-                          style: TextStyle(
+                              //DateFormat().format(state.weather.date!),
+                                                            //DateFormat().format(state.weather.date!),
+                              DateFormat('EEEE dd · ').add_jm().format(state.weather.date!),
+                          //'Viernes 15 · 9:22 AM',
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w300),
@@ -145,19 +196,21 @@ class HomeScreen extends StatelessWidget {
                               ),
                               //Es importante saber que esta dentro de que
                               const SizedBox(width: 5),
-                              const Column(
+                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Soleado',
+                                  const Text(
+                                    'Salida del sol',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                  SizedBox(width: 3),
+                                  const SizedBox(width: 3),
                                   Text(
-                                    '5:34 AM',
-                                    style: TextStyle(
+                                    //'5:34 AM',
+                                    DateFormat('').add_jm().format(state.weather.sunrise!),
+
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w300),
                                   ),
@@ -171,19 +224,20 @@ class HomeScreen extends StatelessWidget {
                               ),
                               //Es importante saber que esta dentro de que
                               const SizedBox(width: 5),
-                              const Column(
+                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Ocaso',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                  SizedBox(width: 3),
+                                  const SizedBox(width: 3),
                                   Text(
-                                    '5:34 PM',
-                                    style: TextStyle(
+                                    //'5:34 PM',
+                                    DateFormat('').add_jm().format(state.weather.sunset!),
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w300),
                                   ),
@@ -208,19 +262,20 @@ class HomeScreen extends StatelessWidget {
                               ),
                               //Es importante saber que esta dentro de que
                               const SizedBox(width: 5),
-                              const Column(
+                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Temp. maxima',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                  SizedBox(width: 3),
+                                  const SizedBox(width: 3),
                                   Text(
-                                    '42°',
-                                    style: TextStyle(
+                                    //'42°',
+                                    '${state.weather.tempMax!.celsius!.round().toString() } C°',
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w300),
                                   ),
@@ -234,19 +289,20 @@ class HomeScreen extends StatelessWidget {
                               ),
                               //Es importante saber que esta dentro de que
                               const SizedBox(width: 5),
-                              const Column(
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Temp. minima',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                  SizedBox(width: 3),
-                                  Text(
-                                    '34°',
-                                    style: TextStyle(
+                                  const SizedBox(width: 3),
+                                   Text(
+                                    //'34°',
+                                    '${state.weather.tempMin!.celsius!.round().toString() } C°',
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w300),
                                   ),
@@ -258,6 +314,9 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   );
+                  }else{
+                    return Container();
+                  }
                 },
               )
             ],
