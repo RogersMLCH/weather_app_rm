@@ -4,36 +4,45 @@ import 'package:geolocator/geolocator.dart';
 import 'package:weather_app_rm/bloc/weather_bloc_bloc.dart';
 import 'package:weather_app_rm/screens/home_screen.dart';
 
-//principal de la clase
+// Principal de la clase
 void main() {
   runApp(const MyApp());
 }
 
-//la clase
+// Definición de la clase MyApp que extiende StatelessWidget.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  // Este es el Widget principla que llama al arhcivo con el home
+    // Método build que retorna el widget principal de la aplicación.
   Widget build(BuildContext context) {
     return MaterialApp(
+        // Título de la aplicación.
         title: 'Weather App RM',
         debugShowCheckedModeBanner: false,
         home: FutureBuilder(
+          // Llama a la función _determinePosition que obtiene la posición del usuario.
           future: _determinePosition(),
+           // Constructor que construye el widget basado en el estado del Future.
           builder: (context,snap)
           {
+            // Si el Future contiene datos (la posición del usuario).
             if(snap.hasData)
             {
               return BlocProvider<WeatherBlocBloc>(
+          // Proveedor de Bloc para la gestión del estado de la aplicación del clima.
           create: (context) => WeatherBlocBloc()..add(FechWeather(snap.data as Position)),
-          child: const HomeScreen()
+          // Crea una instancia de WeatherBlocBloc y agrega un evento para obtener el clima basado en la posición.
+          child: const HomeScreen() // Muestra la pantalla principal de la aplicación (Home Screen).
               );
             }else
             {
+              // Imprime un mensaje de error en caso de que no haya datos.
               print('Error');
               return const Scaffold(
+                // Muestra una pantalla de carga mientras se obtiene la posición.
                 body: Center(
+                  // Indicador de progreso circular.
                   child: CircularProgressIndicator(),
                 ),
                 
